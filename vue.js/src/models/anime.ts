@@ -1,9 +1,9 @@
 export interface AnimeAttributes {
   createdAt: Date;
   updatedAt: Date;
-  synopsis: string//"In the year 2071, humanity has colonoized several of the planets and moons...";
-  coverImageTopOffset: number//400;
-  canonicalTitle: string//"Cowboy Bebop";
+  synopsis: string; //"In the year 2071, humanity has colonoized several of the planets and moons...";
+  coverImageTopOffset: number; //400;
+  canonicalTitle: string; //"Cowboy Bebop";
   averageRating: string;
   startDate: string;
   endDate: string;
@@ -12,8 +12,8 @@ export interface AnimeAttributes {
   status: string; //"finished";
   posterImage: AnimeImage;
   coverImage: AnimeImage;
-  episodeCount: 26;
-  episodeLength: 25;
+  episodeCount: number;
+  episodeLength: number;
   showType: string; //"TV";
   nsfw: boolean;
 }
