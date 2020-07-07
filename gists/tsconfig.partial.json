@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@remote-api/*": ["src/services/remote-api/*"]
+    }
+  }
+}

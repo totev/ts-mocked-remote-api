@@ -36,14 +36,14 @@
 <script lang="ts">
   import { Component, Prop, Vue } from "vue-property-decorator";
   import { Anime } from "@/models/anime";
-  import { KitsuService } from "@/services/kitsu.service";
+  import { AnimeService } from "@remote-api/index";
 
   @Component
   export default class HelloWorld extends Vue {
     private anime: Anime | null = null;
 
     async mounted() {
-      const animeService = new KitsuService();
+      const animeService = new AnimeService();
       this.anime = await animeService.fetchTrending();
     }
   }
