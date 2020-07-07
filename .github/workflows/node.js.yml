@@ -8,13 +8,15 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+    
+    
+defaults:
+  run:
+    working-directory: vue.js
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      working-directory: ./vue.js
-
     strategy:
       matrix:
         node-version: [14.x]
