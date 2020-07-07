@@ -39,7 +39,7 @@
   import { AnimeService } from "@remote-api/index";
 
   @Component
-  export default class HelloWorld extends Vue {
+  export default class TrendingAnime extends Vue {
     private anime: Anime | null = null;
 
     async mounted() {
@@ -53,6 +53,7 @@
   h3 {
     margin: 40px 0 0;
   }
+  
   a {
     color: #42b983;
   }

@@ -75,11 +75,12 @@ And that's it now we should be able to develop the frontend part of our Jamstack
 
 ## Mocking with Typescript and Webpack
 
-You've read the gist of the idea - now it's time to talk about the implementation. Lets divide it into a a 3 step process:
+You've read the gist of the idea - now it's time to talk about the implementation. Lets divide it into a a 4 step process:
 
 1.  implement mock services
 1.  add path mapping in Typescript's compiler options
 1.  setup Webpack to omit the mocks from the production build
+1.  (optional) setup test harness with the custom alias/path mapping
 
 ## Show me the mocked service
 
@@ -162,6 +163,22 @@ module.exports = {
     }
   },
 };
+```
+
+## Configuring the test harness
+Last but not least the test harness  should be updated to be able to follow the custom path mapping as defined in the `tsconfig.json` file. I opted for using [jest](https://jestjs.io/) so the module mapper should only be updated. Everything else can be inherited from the base configuration:
+
+```js
+//@file jest.config.js
+const deepmerge = require("deepmerge");
+const defaultPreset = require("@vue/cli-plugin-unit-jest/presets/typescript/jest-preset");
+
+module.exports = deepmerge(defaultPreset, {
+  moduleNameMapper: {
+    "^@remote-api/(.*)$": "<rootDir>/mock/services/remote-api/$1",
+  },
+});
+
 ```
 
 And that's it - now your project will use the mocks implementation of the remote service when working locally and the real one in the production build! But don't take my word for it - check out the whole example in [this github repository](https://github.com/totev/ts-mocked-deps).
