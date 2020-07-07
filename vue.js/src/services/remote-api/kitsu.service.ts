@@ -6,6 +6,6 @@ export class KitsuService implements RemoteAnimeService {
   fetchTrending(): Promise<Anime> {
     return axios
       .get("/anime-api/trending/anime?limit=1")
-      .then((response) => response.data?.data.pop());
+      .then(response => response.data?.data.pop());
   }
 }

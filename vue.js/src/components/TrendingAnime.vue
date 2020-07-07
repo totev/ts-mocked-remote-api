@@ -34,38 +34,38 @@
 </template>
 
 <script lang="ts">
-  import { Component, Prop, Vue } from "vue-property-decorator";
-  import { Anime } from "@/models/anime";
-  import { AnimeService } from "@remote-api/index";
+import { Component, Prop, Vue } from "vue-property-decorator";
+import { Anime } from "@/models/anime";
+import { AnimeService } from "@remote-api/index";
 
-  @Component
-  export default class TrendingAnime extends Vue {
-    private anime: Anime | null = null;
+@Component
+export default class TrendingAnime extends Vue {
+  private anime: Anime | null = null;
 
-    async mounted() {
-      const animeService = new AnimeService();
-      this.anime = await animeService.fetchTrending();
-    }
+  async mounted() {
+    const animeService = new AnimeService();
+    this.anime = await animeService.fetchTrending();
   }
+}
 </script>
 
 <style scoped>
-  h3 {
-    margin: 40px 0 0;
-  }
-  
-  a {
-    color: #42b983;
-  }
+h3 {
+  margin: 40px 0 0;
+}
 
-  .row {
-    display: flex;
-  }
+a {
+  color: #42b983;
+}
 
-  .column {
-    flex: 50%;
-  }
-  .text-left {
-    text-align: left;
-  }
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+}
+.text-left {
+  text-align: left;
+}
 </style>

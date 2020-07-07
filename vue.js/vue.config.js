@@ -1,7 +1,7 @@
 const path = require("path");
 
 module.exports = {
-  chainWebpack: (config) => {
+  chainWebpack: config => {
     if (process.env.NODE_ENV === "production") {
       config.resolve.alias.set(
         "@remote-api",
@@ -19,13 +19,13 @@ module.exports = {
     proxy: {
       "/anime-api": {
         pathRewrite: {
-          "^/anime-api/": "/", // remove prefix
+          "^/anime-api/": "/" // remove prefix
         },
         target: "http://localhost:4100/",
         ws: true,
         changeOrigin: true,
-        logLevel: "debug",
-      },
-    },
-  },
+        logLevel: "debug"
+      }
+    }
+  }
 };

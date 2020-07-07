@@ -5,12 +5,12 @@
 </template>
 
 <script>
-  import TrendingAnime from "@/components/TrendingAnime.vue";
+import TrendingAnime from "@/components/TrendingAnime.vue";
 
-  export default {
-    name: "Home",
-    components: {
-      TrendingAnime,
-    },
-  };
+export default {
+  name: "Home",
+  components: {
+    TrendingAnime
+  }
+};
 </script>

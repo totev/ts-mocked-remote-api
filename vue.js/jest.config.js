@@ -3,6 +3,6 @@ const defaultPreset = require("@vue/cli-plugin-unit-jest/presets/typescript/jest
 
 module.exports = deepmerge(defaultPreset, {
   moduleNameMapper: {
-    "^@remote-api/(.*)$": "<rootDir>/mock/services/remote-api/$1",
-  },
+    "^@remote-api/(.*)$": "<rootDir>/mock/services/remote-api/$1"
+  }
 });
