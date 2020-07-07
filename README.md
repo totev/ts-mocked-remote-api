@@ -1,4 +1,6 @@
 # ts-mocked-deps
+## Inline remote API mocking with Typescript and Webpack 
+![Node.js CI](https://github.com/totev/ts-mocked-deps/workflows/Node.js%20CI/badge.svg)
 
 Remember how you have to setup a whole bunch of infrastructure locally just to be able to independently work on the frontend part of your Jamstack project? If you're tired of doing so, maybe this short write up on how to replace the infrastructure with code based dependency mocks is just up your alley.
 
@@ -16,7 +18,13 @@ I've been using some derivation of the local setup depicted bellow for a couple 
 - it needed a lot of manual work to adjust to API changes
 - I always seem to forget to write some proxy rule in the frontend framework's configuration which required a restart of the local dev server
 
-That being said, the setup is imho still very helpful and works well especially for projects where Typescript and Webpack are not available.
+Also let's not forget all of the pros of the source code mocks:
+ - compile time errors on unreflected API changes
+ - fine grained control over every aspects of the mocks
+ - automatic code rebuild
+ - the mocks are directly available in the tests - no need to do custom remote API mocking/stubbing 
+
+That being said, the old setup is imho still very helpful and works well especially for projects where Typescript and Webpack are not available.
 
 ## The prerequisites
 
