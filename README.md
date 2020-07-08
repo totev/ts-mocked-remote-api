@@ -40,7 +40,7 @@ To illustrate both mocking techniques I'll be using a demo Vue.js project create
 
 For the remote api part I'll be using [Kitsu's free anime API](https://kitsu.docs.apiary.io/#introduction/json-api) to display a random anime content.
 
-Also I'm assuming, that you have a reverse proxy running on production your web server to rewrite remote api calls and not run into any CORS issues. In this case it should have a rewrite rule pointing to the remote API `/remote-api -> https://kitsu.docs.apiary.io/#introduction/json-api`
+Also I'm assuming, that you have a reverse proxy running on production your web server to rewrite remote api calls and not run into any CORS issues. In this case it should have a rewrite rule pointing to the remote API `/remote-api -> https://kitsu.docs.apiary.io/#introduction/json-api`. If you don't have access to a service which supports this, just make sure to replace the URL prefix during build time - there is an example in the code repository for this use case also.
 
 ## A blast from the (not so distant) past
 
