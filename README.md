@@ -6,7 +6,7 @@ Remember how you have to setup a whole bunch of infrastructure locally just to b
 
 ## In a nutshell
 
-The basic idea is to have inline code mocks of remote services which will be compiled while running your project locally but will not be bundled with your production code.
+The basic idea is to have inline code mocks of remote services which will be compiled while running your project locally but will not be bundled with your production code. The separation is being done via additional Typescript path mappings and module resolving in Webpack.  
 
 ## The why
 
@@ -177,7 +177,7 @@ module.exports = {
 };
 ```
 
-## Configuring the test harness
+### Configuring the test harness
 Last but not least the test harness  should be updated to be able to follow the custom path mapping as defined in the `tsconfig.json` file. I opted for using [jest](https://jestjs.io/) so the module mapper should only be updated. Everything else can be inherited from the base configuration:
 
 ```js
