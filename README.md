@@ -1,10 +1,10 @@
 # ts-mocked-deps
-## Inline remote API mocking with Typescript and Webpack 
+## Code based remote API mocking with Typescript and Webpack 
 ![Node.js CI](https://github.com/totev/ts-mocked-deps/workflows/Node.js%20CI/badge.svg)
 
 Remember how you have to setup a whole bunch of infrastructure locally just to be able to independently work on the frontend part of your Jamstack project? If you're tired of doing so, maybe this short write up on how to replace the infrastructure with code based dependency mocks is just up your alley.
 
-## The idea gist
+## In a nutshell
 
 The basic idea is to have inline code mocks of remote services which will be compiled while running your project locally but will not be bundled with your production code.
 
@@ -42,7 +42,7 @@ For the remote api part I'll be using [Kitsu's free anime API](https://kitsu.doc
 
 Also I'm assuming, that you have a reverse proxy running on production your web server to rewrite remote api calls and not run into any CORS issues. In this case it should have a rewrite rule pointing to the remote API `/remote-api -> https://kitsu.docs.apiary.io/#introduction/json-api`
 
-## A blast from the (recent) past
+## A blast from the (not so distant) past
 
 A typical implementation for a REST based mock can be found in the `og-mock` folder. I have used very similar ones for mocking GraphQL based APIs but they generally required even more work to get right so I'll omit describing them and their many pitfalls for brevity.
 
