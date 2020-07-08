@@ -60,7 +60,8 @@ Now all that's left is a HTTP proxy rerouting the requests from the frontend dev
 The HTTP proxy configuration for the example used here looks like this:
 
 ```js 
-//@gists/vue.config.js
+//@file gists/vue.config.js
+// <script src="https://gist.github.com/totev/8298858b282d652c6963832458b4b6fe.js"></script>
 module.exports = {
   devServer: {
     proxy: {
@@ -96,6 +97,7 @@ Coding the mocked services is pretty much straightforward, since there is an int
 
 ```ts
 //@file gists/anime.mock-service.ts
+// <script src="https://gist.github.com/totev/f46c0d166ef28ed3d9d04a2e325b9f60.js"></script>
 import faker from "faker";
 import { Anime } from "../../../src/models/anime";
 import { RemoteAnimeService } from "../../../src/services/remote-api/remote.service";
@@ -130,6 +132,7 @@ A new path mapping is needed in the Typescript configuration in order to be able
 
 ```json
  //@file gists/tsconfig.partial.json
+ // <script src="https://gist.github.com/totev/f8a443c1aa03f055e76cc2a14204a4bc.js"></script>
  {
   "compilerOptions": {
     "paths": {
@@ -154,6 +157,7 @@ The last step is to configure [module resolving in webpack](https://webpack.js.o
 
 ```js
 //@file gists/vue.webpack-config.js
+// <script src="https://gist.github.com/totev/d1ba39c8b1ac0ac2f5be29a5a41a307c.js"></script>
 const path = require("path");
 
 module.exports = {
@@ -178,6 +182,7 @@ Last but not least the test harness  should be updated to be able to follow the 
 
 ```js
 //@file jest.config.js
+// <script src="https://gist.github.com/totev/308abda0d9b3a8ea7367af01a1667725.js"></script>
 const deepmerge = require("deepmerge");
 const defaultPreset = require("@vue/cli-plugin-unit-jest/presets/typescript/jest-preset");
 
