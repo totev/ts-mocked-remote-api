@@ -1,12 +1,14 @@
 # ts-mocked-remote-api
-## Code based remote API mocking with Typescript and Webpack 
+
+## Code based remote API mocking with Typescript and Webpack
+
 ![Node.js CI](https://github.com/totev/ts-mocked-deps/workflows/Node.js%20CI/badge.svg)
 
 Remember how you have to set up a whole bunch of infrastructure locally just to be able to independently work on the frontend part of your Jamstack project? If you're tired of doing so, maybe this short write-up on how to replace the infrastructure with code based dependency mocks is just up your alley.
 
 ## In a nutshell
 
-The basic idea is to have inline mocks of remote services in your frontend code which will be compiled while running your project locally but will not be bundled with your production code. The separation is achieved via additional Typescript path mappings and module resolving in Webpack.  
+The basic idea is to have inline mocks of remote services in your frontend code which will be compiled while running your project locally but will not be bundled with your production code. The separation is achieved via additional Typescript path mappings and module resolving in Webpack.
 
 ## The why
 
@@ -20,10 +22,10 @@ In the past I've typically set up a local server to mock my remote API, but have
 
 Frontend-based code mocks, on the other hand, offer a number of benefits to speed up development:
 
- - compile time errors resulting from unreflected API changes
- - fine grained control over every aspects of the mocks
- - automatic code rebuild
- - the mocks are directly available in the tests - no need to do custom remote API mocking/stubbing 
+- compile time errors resulting from unreflected API changes
+- fine grained control over every aspects of the mocks
+- automatic code rebuild
+- the mocks are directly available in the tests - no need to do custom remote API mocking/stubbing
 
 That being said, the old setup can imho still be very helpful in some circumstances, especially for projects where Typescript and Webpack are not available.
 
@@ -47,7 +49,7 @@ Also I'm assuming, that you have a reverse proxy running on production your web 
 
 ## A blast from the (not so distant) past
 
-A typical implementation for a REST based remote API mock can be found in the `og-mock` folder in the repository. I have used very similar ones for mocking GraphQL based APIs but they generally required even more work to get right so I'll omit describing them and their many pitfalls for brevity.
+A typical implementation for a REST based remote API mock can be found in the `express-mock` folder in the repository. I have used very similar ones for mocking GraphQL based APIs but they generally required even more work to get right so I'll omit describing them and their many pitfalls for brevity.
 
 Just a quick overview of what's needed for this to work:
 
@@ -56,13 +58,13 @@ Just a quick overview of what's needed for this to work:
 
 The idea here being that you start the local express server which will mimic the behavior of your backend server. The HTTP proxy will be the router between your local development server for the frontend and the mocking backend server.
 
-To try it out head out to 'og-mock' and run 'npm run mock:api' which will fire up the express server listening on port 4100 and await to serve mock data. A quick check with a command like `curl "localhost:4100/trending/anime?limit=2"` should show if the mocked server is working.
+To try it out head out to 'express-mock' and run 'npm run mock:api' which will fire up the express server listening on port 4100 and await to serve mock data. A quick check with a command like `curl "localhost:4100/trending/anime?limit=2"` should show if the mocked server is working.
 
 Now all that's left is a HTTP proxy rerouting the requests from the frontend development server to the backend mock. Usually the rule looks something like this: `localhost:8080/remote-api -> localhost:4100`. As this example is using Vue.js with the Vue CLI the way to wire this is via a dev proxy - as described [in the official documentation](https://cli.vuejs.org/config/#devserver-proxy).
 
 The HTTP proxy configuration for the example used here looks like this:
 
-```js 
+```js
 //@file gists/vue.config.js
 // <script src="https://gist.github.com/totev/8298858b282d652c6963832458b4b6fe.js"></script>
 module.exports = {
@@ -124,8 +126,6 @@ export class MockAnimeService implements RemoteAnimeService {
     });
   }
 }
-
-
 ```
 
 ### Configuring the Typescript compiler
@@ -133,9 +133,9 @@ export class MockAnimeService implements RemoteAnimeService {
 A new path mapping is needed in the Typescript configuration in order to be able to pinpoint which imports are to be replaced later on in the bundling phase by Webpack.
 
 ```json
- //@file gists/tsconfig.partial.json
- // <script src="https://gist.github.com/totev/f8a443c1aa03f055e76cc2a14204a4bc.js"></script>
- {
+//@file gists/tsconfig.partial.json
+// <script src="https://gist.github.com/totev/f8a443c1aa03f055e76cc2a14204a4bc.js"></script>
+{
   "compilerOptions": {
     "paths": {
       "@remote-api/*": ["src/services/remote-api/*"]
@@ -180,6 +180,7 @@ module.exports = {
 ```
 
 ### Configuring the test harness
+
 Last but not least the test harness should be updated to be able to follow the custom path mapping as defined in the `tsconfig.json` file. I opted for using [jest](https://jestjs.io/) so the module mapper should only be updated. Everything else can be inherited from the base configuration:
 
 ```js
@@ -193,7 +194,6 @@ module.exports = deepmerge(defaultPreset, {
     "^@remote-api/(.*)$": "<rootDir>/mock/services/remote-api/$1",
   },
 });
-
 ```
 
 And that's it - now your project will use the mocks implementation of the remote service when working locally and the real one in the production build! But don't take my word for it - check out the whole example in [this github repository](https://github.com/totev/ts-mocked-deps).
