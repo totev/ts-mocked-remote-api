@@ -148,6 +148,7 @@ A service import will then look like this:
 
 ```ts
 //@file gists/service.import.ts
+// <script src="https://gist.github.com/totev/dec33946432e615e13966548b9d4c0be.js"></script>
 import { AnimeService } from "@remote-api/index";
 ```
 
