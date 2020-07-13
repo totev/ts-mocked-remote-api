@@ -158,7 +158,7 @@ Also note, that I am using a facade for convenient class/interface exporting.
 
 ### Configuring Webpack
 
-The last step is to configure [module resolving in webpack](https://webpack.js.org/configuration/resolve/#resolvealias). The idea behind it being to explicitly specify the location of the imported code modules based on the current environment.
+Now let's configure [module resolving in webpack](https://webpack.js.org/configuration/resolve/#resolvealias). The idea behind it being to explicitly specify the location of the imported code modules based on the current environment.
 
 ```js
 //@file gists/vue.webpack-config.js
