@@ -2,7 +2,7 @@
 
 ## Code based remote API mocking with Typescript and Webpack
 
-![Node.js CI](https://github.com/totev/ts-mocked-deps/workflows/Node.js%20CI/badge.svg)
+![Node.js CI](https://github.com/totev/ts-mocked-remote-api/workflows/Node.js%20CI/badge.svg)
 
 Remember how you have to set up a whole bunch of infrastructure locally just to be able to independently work on the frontend part of your Jamstack project? If you're tired of doing so, maybe this short write-up on how to replace the infrastructure with code based dependency mocks is just up your alley.
 
@@ -41,9 +41,11 @@ I'm assuming that you are using the following:
 
 To illustrate both mocking techniques I'll be using a demo Vue.js project created with the official CLI. Note that you can use any modern frontend framework with Typescript and Webpack support.
 
-The demo project is available in [this github repository](https://github.com/totev/ts-mocked-deps).
+The demo project is available in [this github repository](https://github.com/totev/ts-mocked-remote-api).
 
 For the remote api part I'll be using [Kitsu's free anime API](https://kitsu.docs.apiary.io/#introduction/json-api) to display a random anime content.
+
+The resulting "application" can be found under https://ts-mocked-remote-api.codecentric.rocks/.
 
 ## A blast from the (not so distant) past
 
@@ -194,4 +196,4 @@ module.exports = deepmerge(defaultPreset, {
 });
 ```
 
-And that's it - now your project will use the mocks implementation of the remote service when working locally and the real one in the production build! But don't take my word for it - check out the whole example in [this github repository](https://github.com/totev/ts-mocked-deps).
+And that's it - now your project will use the mocks implementation of the remote service when working locally and the real one in the production build! But don't take my word for it - check out the whole example in [this github repository](https://github.com/totev/ts-mocked-remote-api).
