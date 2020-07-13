@@ -16,7 +16,7 @@ function createAnimeMock(): Anime {
       averageRating: String(faker.random.number()),
       ageRating: "PG",
       ageRatingGuide: "Teens 13 or older",
-      status: "finished",
+      status: "mocked finished",
       posterImage: {
         tiny: faker.random.image(),
         small: faker.random.image(),
