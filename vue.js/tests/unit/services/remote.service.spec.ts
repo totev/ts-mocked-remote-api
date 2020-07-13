@@ -1,6 +1,6 @@
 import { AnimeService } from "@remote-api/index";
 
-describe("AnimeServiceSpec", () => {
+describe("RemoteAnimeServiceSpec", () => {
   it("does not trigger remote service", async () => {
     const animeService = new AnimeService();
     const result = await animeService.fetchTrending();
