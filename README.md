@@ -4,6 +4,8 @@
 
 ![Node.js CI](https://github.com/totev/ts-mocked-remote-api/workflows/Node.js%20CI/badge.svg)
 
+## Introduction
+
 Remember how you have to set up a whole bunch of infrastructure locally just to be able to independently work on the frontend part of your Jamstack project? If you're tired of doing so, maybe this short write-up on how to replace the infrastructure with code based dependency mocks is just up your alley.
 
 ## In a nutshell
@@ -197,9 +199,10 @@ module.exports = deepmerge(defaultPreset, {
 });
 ```
 
-With the above *jest* configuration, importing the remote services will always include the mocked version:
+With the above _jest_ configuration, importing the remote services will always include the mocked version:
+
 ```ts
-//@file gists/remote.service.spec.ts 
+//@file gists/remote.service.spec.ts
 // <script src="https://gist.github.com/totev/3f465547e5096aa8e2fdf4943124aaff.js"></script>
 import { AnimeService } from "@remote-api/index";
 
@@ -211,7 +214,6 @@ describe("RemoteAnimeServiceSpec", () => {
     expect(result.attributes.status).toBe("mocked finished");
   });
 });
-
 ```
 
 And that's it - now your project will use the mocks implementation of the remote service when working locally and the real one in the production build! But don't take my word for it - check out the whole example in [this github repository](https://github.com/totev/ts-mocked-remote-api).
