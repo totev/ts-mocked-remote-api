@@ -45,8 +45,6 @@ The demo project is available in [this github repository](https://github.com/tot
 
 For the remote api part I'll be using [Kitsu's free anime API](https://kitsu.docs.apiary.io/#introduction/json-api) to display a random anime content.
 
-Also I'm assuming, that you have a reverse proxy running on production your web server to rewrite remote api calls and not run into any CORS issues. In this case it should have a rewrite rule pointing to the remote API `/remote-api -> https://kitsu.docs.apiary.io/#introduction/json-api`. If you don't have access to a service which supports this, just make sure to replace the URL prefix during build time - there is an example in the code repository for this use case also.
-
 ## A blast from the (not so distant) past
 
 A typical implementation for a REST based remote API mock can be found in the `express-mock` folder in the repository. I have used very similar ones for mocking GraphQL based APIs but they generally required even more work to get right so I'll omit describing them and their many pitfalls for brevity.
