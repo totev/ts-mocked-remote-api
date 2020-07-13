@@ -196,4 +196,21 @@ module.exports = deepmerge(defaultPreset, {
 });
 ```
 
+With the above *jest* configuration, importing the remote services will always include the mocked version:
+```ts
+//@file gists/remote.service.spec.ts 
+// <script src="https://gist.github.com/totev/3f465547e5096aa8e2fdf4943124aaff.js"></script>
+import { AnimeService } from "@remote-api/index";
+
+describe("RemoteAnimeServiceSpec", () => {
+  it("does not trigger remote service", async () => {
+    const animeService = new AnimeService();
+    const result = await animeService.fetchTrending();
+    expect(result.id).toBeTruthy();
+    expect(result.attributes.status).toBe("mocked finished");
+  });
+});
+
+```
+
 And that's it - now your project will use the mocks implementation of the remote service when working locally and the real one in the production build! But don't take my word for it - check out the whole example in [this github repository](https://github.com/totev/ts-mocked-remote-api).
