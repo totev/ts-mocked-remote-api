@@ -1,30 +1,31 @@
-# ts-mocked-deps
+# ts-mocked-remote-api
 ## Code based remote API mocking with Typescript and Webpack 
 ![Node.js CI](https://github.com/totev/ts-mocked-deps/workflows/Node.js%20CI/badge.svg)
 
-Remember how you have to setup a whole bunch of infrastructure locally just to be able to independently work on the frontend part of your Jamstack project? If you're tired of doing so, maybe this short write up on how to replace the infrastructure with code based dependency mocks is just up your alley.
+Remember how you have to set up a whole bunch of infrastructure locally just to be able to independently work on the frontend part of your Jamstack project? If you're tired of doing so, maybe this short write-up on how to replace the infrastructure with code based dependency mocks is just up your alley.
 
 ## In a nutshell
 
-The basic idea is to have inline code mocks of remote services which will be compiled while running your project locally but will not be bundled with your production code. The separation is being done via additional Typescript path mappings and module resolving in Webpack.  
+The basic idea is to have inline mocks of remote services in your frontend code which will be compiled while running your project locally but will not be bundled with your production code. The separation is achieved via additional Typescript path mappings and module resolving in Webpack.  
 
 ## The why
 
-I've been using some derivation of the local setup depicted bellow for a couple of years and always had some problems with it:
+In the past I've typically set up a local server to mock my remote API, but have always had some problems with that approach:
 
 - it added more dependencies to the project
 - it required an extra step during initialization
-- it was prompt to error when the API changed
+- it was prone to error when the API changed
 - it needed a lot of manual work to adjust to API changes
-- I always seem to forget to write some proxy rule in the frontend framework's configuration which required a restart of the local dev server
+- I always seemed to forget to write some proxy rule in the frontend framework's configuration which required a restart of the local dev server
 
-Also let's not forget all of the pros of the source code mocks:
- - compile time errors on unreflected API changes
+Frontend-based code mocks, on the other hand, offer a number of benefits to speed up development:
+
+ - compile time errors resulting from unreflected API changes
  - fine grained control over every aspects of the mocks
  - automatic code rebuild
  - the mocks are directly available in the tests - no need to do custom remote API mocking/stubbing 
 
-That being said, the old setup is imho still very helpful and works well especially for projects where Typescript and Webpack are not available.
+That being said, the old setup can imho still be very helpful in some circumstances, especially for projects where Typescript and Webpack are not available.
 
 ## The prerequisites
 
@@ -32,11 +33,13 @@ I'm assuming that you are using the following:
 
 - UI with Typescript support
 - Webpack as bundler
-- HTTP remote API
+- HTTP remote REST API
 
 ## Demo setup
 
 To illustrate both mocking techniques I'll be using a demo Vue.js project created with the official CLI. Note that you can use any modern frontend framework with Typescript and Webpack support.
+
+The demo project is available in [this github repository](https://github.com/totev/ts-mocked-deps).
 
 For the remote api part I'll be using [Kitsu's free anime API](https://kitsu.docs.apiary.io/#introduction/json-api) to display a random anime content.
 
@@ -44,7 +47,7 @@ Also I'm assuming, that you have a reverse proxy running on production your web 
 
 ## A blast from the (not so distant) past
 
-A typical implementation for a REST based mock can be found in the `og-mock` folder. I have used very similar ones for mocking GraphQL based APIs but they generally required even more work to get right so I'll omit describing them and their many pitfalls for brevity.
+A typical implementation for a REST based remote API mock can be found in the `og-mock` folder in the repository. I have used very similar ones for mocking GraphQL based APIs but they generally required even more work to get right so I'll omit describing them and their many pitfalls for brevity.
 
 Just a quick overview of what's needed for this to work:
 
@@ -79,19 +82,18 @@ module.exports = {
 };
 ```
 
-
-And that's it now we should be able to develop the frontend part of our Jamstack app independent from the backend. Oh wait, this setup was just to show how the process used to look like - the interesting part is yet to come :(
+And that's it - now we should be able to develop the frontend part of our Jamstack app independent from the real backend. Oh wait, this setup was just to show how the process used to look like - the interesting part is yet to come :(
 
 ## Mocking with Typescript and Webpack
 
-You've read the gist of the idea - now it's time to talk about the implementation. Lets divide it into a a 4 step process:
+You've read the gist of the idea - now it's time to talk about the implementation. Lets divide it into a 4 step process:
 
 1.  implement mock services
 1.  add path mapping in Typescript's compiler options
 1.  setup Webpack to omit the mocks from the production build
 1.  (optional) setup test harness with the custom alias/path mapping
 
-## Show me the mocked service
+### Show me the mocked service
 
 Coding the mocked services is pretty much straightforward, since there is an interface we can implement. I'll be using [faker.js](https://github.com/Marak/Faker.js#readme) for producing semantically and syntactically correct fake data. Also, just for fun, there is a random delay in the response. You can go wild and add exceptions, faulty data and so on to appear randomly in order to make it feel more like working with a remote API.
 
@@ -178,7 +180,7 @@ module.exports = {
 ```
 
 ### Configuring the test harness
-Last but not least the test harness  should be updated to be able to follow the custom path mapping as defined in the `tsconfig.json` file. I opted for using [jest](https://jestjs.io/) so the module mapper should only be updated. Everything else can be inherited from the base configuration:
+Last but not least the test harness should be updated to be able to follow the custom path mapping as defined in the `tsconfig.json` file. I opted for using [jest](https://jestjs.io/) so the module mapper should only be updated. Everything else can be inherited from the base configuration:
 
 ```js
 //@file jest.config.js
