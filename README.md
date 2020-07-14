@@ -216,4 +216,4 @@ describe("RemoteAnimeServiceSpec", () => {
 });
 ```
 
-And that's it - now your project will use the mocks implementation of the remote service when working locally and the real one in the production build! But don't take my word for it - check out the whole example in [this github repository](https://github.com/totev/ts-mocked-remote-api).
+And that's it - now your project will use the mocked implementation of the remote service when working locally and the real one in the production build! But don't take my word for it - check out the whole example in [this github repository](https://github.com/totev/ts-mocked-remote-api).
