@@ -1,2 +1,2 @@
 (window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["about"],{f820:function(t,e,n){"use strict";n.r(e);var s=function(){var t=this,e=t.$createElement;t._self._c;return t._m(0)},a=[function(){var t=this,e=t.$createElement,n=t._self._c||e;return n("div",{staticClass:"about"},[n("h1",[t._v(" This web site displays trending anime content via "),n("a",{attrs:{href:"https://kitsu.io",target:"_blank",rel:"noopener"}},[t._v("Kitsu")])])])}],i=n("2877"),r={},l=Object(i["a"])(r,s,a,!1,null,null,null);e["default"]=l.exports}}]);
-//# sourceMappingURL=about.f20b2f3e.js.map
+//# sourceMappingURL=about.b5451125.js.map
